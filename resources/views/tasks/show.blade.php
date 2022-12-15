@@ -13,6 +13,10 @@
         </tr>
 
         <tr>
+            <th>ステータス</th>
+            <td>{{ $task->status }}</td>
+        </tr>
+        <tr>
             <th>メッセージ</th>
             <td>{{ $task->content }}</td>
         </tr>
@@ -26,7 +30,7 @@
         @csrf
         @method('DELETE')
         
-        <buttton type="submit" class="btn btn-error btn-outline"
-                 onclick="return confirm('id = {{ $task->id }} のタスクを削除します。よろしいですか？')">削除</buttton>
+        <button type="submit" class="btn btn-error btn-outline"
+                 onclick="return confirm('id = {{ $task->id }} のタスクを削除します。よろしいですか？')">削除</button>
     </form>
 @endsection

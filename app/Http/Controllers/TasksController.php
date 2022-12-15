@@ -42,10 +42,12 @@ class TasksController extends Controller
     {
          // バリデーション未入力チェック
         $request->validate([
+            'status' => 'required|max:10', 
             'content' => 'required|max:255',
         ]);
         //タスク作成
         $task = new Task;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         
@@ -81,10 +83,16 @@ class TasksController extends Controller
     // putまたはpatchでmessages/（任意のid）にアクセスされた場合の「更新処理」
     public function update(Request $request, $id)
     {
+        // バリデーション未入力チェック
+        $request->validate([
+            'status' => 'required|max:10', 
+            'content' => 'required|max:255',
+        ]);
 
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         
@@ -97,7 +105,6 @@ class TasksController extends Controller
     {
          // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
-
         // メッセージを削除
         $task->delete();
         
